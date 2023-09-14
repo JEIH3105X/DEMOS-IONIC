@@ -1,0 +1,92 @@
+<!-------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------->
+<form
+  [formGroup]="evaluacionPracticaOperacion"
+  (ngSubmit)="registrarEvaluacion()"
+>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button
+        expand="full"
+        size="large"
+        color="success"
+        type="button"
+        (click)="mostrarHoras('Manual')"
+        >Manual</ion-button
+      >
+    </ion-col>
+    <ion-col size="6">
+      <ion-button
+        expand="full"
+        size="large"
+        color="success"
+        type="button"
+        (click)="mostrarHoras('Automatico')"
+        >Automatico</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6">
+      <ion-text color="danger" *ngIf="manual">Manual</ion-text>
+    </ion-col>
+    <ion-col size="6">
+      <ion-text color="danger" *ngIf="automatico">Automatico</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-card mode="ios">
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Hr / Inicial</ion-label>
+        <ion-datetime-button
+          slot="end"
+          datetime="Hora_Inicial_Sesion"
+        ></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              presentation="time"
+              locale="es-MX"
+              [showDefaultButtons]="true"
+              doneText="Aceptar"
+              cancelText="Cancelar"
+              mode="ios"
+              id="Hora_Inicial_Sesion"
+              formControlName="Hora_Inicial_Sesion"
+              (ionChange)="calcula_Horas($event.target)"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hr / Final</ion-label>
+        <ion-datetime-button
+          slot="end"
+          datetime="Hora_Final_Sesion"
+        ></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              presentation="time"
+              locale="es-MX"
+              [showDefaultButtons]="true"
+              doneText="Aceptar"
+              cancelText="Cancelar"
+              mode="ios"
+              id="Hora_Final_Sesion"
+              formControlName="Hora_Final_Sesion"
+              (ionChange)="calcula_Horas($event.target)"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-button expand="full" size="large" color="success" type="submit">
+        <ion-icon slot="start" name="save-sharp"></ion-icon>
+        Guardar
+        <ion-icon slot="end" name="save-sharp"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</form>
